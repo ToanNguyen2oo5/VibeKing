@@ -176,6 +176,16 @@ export default function CultureCard({ outfit, customizations, useDemoData = fals
       {/* Expanded details */}
       {expanded && (
         <div className="culture-card__details animate-fade-in-up">
+          {/* Structure */}
+          {outfit.mo_ta_cau_truc && (
+            <div className="culture-card__detail-row">
+              <span className="culture-card__detail-label">🏛️ Cấu trúc chuẩn xác</span>
+              <p className="culture-card__detail-value" style={{ margin: 0, lineHeight: 1.6 }}>
+                {outfit.mo_ta_cau_truc}
+              </p>
+            </div>
+          )}
+
           {/* Colors */}
           <div className="culture-card__detail-row">
             <span className="culture-card__detail-label">🎨 Màu sắc</span>

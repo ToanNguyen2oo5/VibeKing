@@ -38,6 +38,7 @@ export async function fileToBase64(file) {
 function buildOutfitPrompt(outfitData, angle = 0, customizations = {}) {
   const colors = outfitData.mau_dac_trung.join(', ');
   const accessories = outfitData.phu_kien_di_kem.join(', ');
+  const structureDesc = outfitData.mo_ta_cau_truc || '';
 
   let angleInstruction = '';
   if (angle === 0) {
@@ -64,7 +65,10 @@ Yêu cầu tùy chỉnh phom dáng từ người dùng:
 `;
   }
 
-  return `Tạo ảnh chân dung toàn thân chất lượng cao của nhân vật mặc trang phục "${outfitData.ten}".
+  return `Tạo ảnh chân dung toàn thân chất lượng cao của nhân vật mặc trang phục truyền thống Việt Nam "${outfitData.ten}".
+
+ĐẶC BIỆT QUAN TRỌNG — MÔ TẢ CẤU TRÚC TRANG PHỤC CHÍNH XÁC (phải tuân thủ 100%):
+${structureDesc}
 
 Chi tiết trang phục:
 - Tên: ${outfitData.ten}
@@ -75,11 +79,12 @@ Chi tiết trang phục:
 ${customText}
 
 Yêu cầu ảnh:
-- Phong cách: chụp thời trang editorial, ánh sáng studio chuyên nghiệp ấm áp
-- Bối cảnh: phông nền Việt Nam đẹp, phù hợp với trang phục (kiến trúc cổ, thiên nhiên, hoặc studio)
+- Phong cách: chụp thời trang editorial, ánh sáng studio chuyên nghiệp ấm áp.
+- Bối cảnh: phông nền Việt Nam đẹp phù hợp vùng miền ${outfitData.vung_mien} (kiến trúc cổ, thiên nhiên, hoặc studio).
 - Nhân vật: trẻ trung (18-25 tuổi), tự tin, biểu cảm tự nhiên
 - ${angleInstruction}
-- Ảnh rõ nét, chi tiết trang phục chính xác, màu sắc sống động`;
+- Ảnh rõ nét, chi tiết trang phục CHÍNH XÁC theo mô tả cấu trúc ở trên, màu sắc sống động.
+- TUYỆT ĐỐI KHÔNG tự ý thay đổi cấu trúc trang phục (số tà áo, lớp áo bên trong, kiểu cổ, phụ kiện đầu).`;
 }
 
 /**
@@ -95,10 +100,18 @@ export async function generateOutfitImage(userPhotoBase64, outfitData, angle = 0
     return getDemoImage(outfitData.id, angle);
   }
 
-  // Nếu người dùng upload ảnh mặt, sử dụng Hugging Face FLUX PuLID
-  if (userPhotoBase64) {
-    console.log('Sử dụng Hugging Face FLUX PuLID cho:', outfitData.ten);
-    return await generateOutfitImageWithFaceHF(userPhotoBase64, outfitData, angle, customizations);
+  // Nếu người dùng upload ảnh mặt và là góc chính diện (0 độ), ưu tiên dùng Hugging Face FLUX PuLID
+  if (userPhotoBase64 && angle === 0) {
+    try {
+      console.log('Sử dụng Hugging Face FLUX PuLID cho:', outfitData.ten);
+      return await generateOutfitImageWithFaceHF(userPhotoBase64, outfitData, angle, customizations);
+    } catch (hfError) {
+      console.warn(
+        'Hugging Face FLUX PuLID không khả dụng hoặc hết Quota ZeroGPU. Tự động chuyển tiếp sang Gemini để ghép mặt:',
+        hfError.message
+      );
+      // Tiếp tục xuống luồng Gemini bên dưới (Gemini đã hỗ trợ userPhotoBase64 làm ảnh tham chiếu)
+    }
   }
 
   const genAI = getAI();
@@ -214,7 +227,8 @@ async function generateFallbackImage(outfitData, angle = 0, customizations = {})
   // Random seed để các góc không bị trùng ảnh nếu prompt quá giống nhau
   const seed = Math.floor(Math.random() * 100000);
 
-  const prompt = `A highly detailed fashion portrait of a young Vietnamese person wearing traditional ${outfitData.ten}, ${angleText} ${customText}colors: ${outfitData.mau_dac_trung.join(', ')}. Cinematic lighting, professional photography, photorealistic, 8k resolution.`;
+  const structureEn = outfitData.mo_ta_cau_truc_en || `traditional Vietnamese ${outfitData.ten}`;
+  const prompt = `A highly detailed fashion portrait of a young Vietnamese person wearing: ${structureEn}. ${angleText} ${customText}colors: ${outfitData.mau_dac_trung.join(', ')}. Cinematic lighting, professional photography, photorealistic, 8k resolution, authentic traditional Vietnamese garment construction.`;
   const encodedPrompt = encodeURIComponent(prompt);
   
   // Trả URL trực tiếp — thẻ <img> sẽ tự tải (không bị CORS chặn)

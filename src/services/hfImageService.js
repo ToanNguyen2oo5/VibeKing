@@ -52,7 +52,8 @@ export async function generateOutfitImageWithFaceHF(userPhotoBase64, outfitData,
   let customText = translateCustomizations(customizations);
   if (customText) customText += ', ';
 
-  const prompt = `A highly detailed fashion editorial portrait of a young Vietnamese person wearing traditional ${outfitData.ten}, ${angleText}, ${customText}colors: ${outfitData.mau_dac_trung.join(', ')}. Cinematic lighting, professional studio photography, photorealistic, 8k resolution, highly detailed texture.`;
+  const structureEn = outfitData.mo_ta_cau_truc_en || `traditional Vietnamese ${outfitData.ten}`;
+  const prompt = `A highly detailed fashion editorial portrait of a young Vietnamese person wearing: ${structureEn}. ${angleText}, ${customText}colors: ${outfitData.mau_dac_trung.join(', ')}. Cinematic lighting, professional studio photography, photorealistic, 8k resolution, highly detailed textile texture.`;
   
   const faceBlob = base64ToBlob(userPhotoBase64);
 
@@ -69,7 +70,7 @@ export async function generateOutfitImageWithFaceHF(userPhotoBase64, outfitData,
     1152,     // height
     20,       // num_steps
     1.0,      // id_weight
-    "bad quality, worst quality, text, signature, watermark, extra limbs", // neg_prompt
+    `bad quality, worst quality, text, signature, watermark, extra limbs${outfitData.negative_prompt_en ? ', ' + outfitData.negative_prompt_en : ''}`, // neg_prompt
     1,        // timestep_to_start_cfg
     128       // max_sequence_length
   ];
@@ -77,7 +78,14 @@ export async function generateOutfitImageWithFaceHF(userPhotoBase64, outfitData,
   console.log("Đang kết nối tới Hugging Face Space (yanze/PuLID-FLUX)... Quá trình này có thể mất 1-3 phút nếu server đang ngủ.");
   
   try {
-    const client = await Client.connect("yanze/PuLID-FLUX");
+    const hfToken = import.meta.env.VITE_HF_TOKEN;
+    const connectOptions = {};
+    if (hfToken && hfToken !== 'your_hf_token_here') {
+      connectOptions.token = hfToken;
+      connectOptions.hf_token = hfToken;
+    }
+
+    const client = await Client.connect("yanze/PuLID-FLUX", connectOptions);
     console.log("Đã kết nối! Đang gửi yêu cầu sinh ảnh...");
     
     const result = await client.predict("generate_image", inputs);
