@@ -1,0 +1,262 @@
+/* CultureCard — editorial sidebar strip */
+.culture-card {
+  padding: var(--space-6) 0;
+  border-top: 1px solid var(--color-border);
+  border-bottom: none;
+  background: transparent;
+  border-radius: 0;
+  max-width: none;
+}
+
+.culture-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: var(--space-5);
+}
+
+.culture-card__title-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.culture-card__title {
+  font-family: var(--font-serif);
+  font-size: var(--font-size-xl);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.culture-card__gender-tag {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Badge chips */
+.badge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.badge-bac {
+  border-color: rgba(43, 58, 85, 0.4);
+  color: #7BA0C9;
+}
+
+.badge-trung {
+  border-color: rgba(122, 31, 43, 0.4);
+  color: #C96B78;
+}
+
+.badge-nam {
+  border-color: rgba(201, 161, 90, 0.4);
+  color: var(--color-gold);
+}
+
+/* Body */
+.culture-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: var(--space-5);
+}
+
+.culture-card__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.skeleton {
+  display: block;
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-sm);
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(247, 243, 236, 0.04) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.culture-card__section {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.culture-card__icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.culture-card__section-title {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-1);
+}
+
+.culture-card__text {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.culture-card__fun-fact {
+  padding: var(--space-3) var(--space-4);
+  border-left: 2px solid var(--color-gold);
+  background: rgba(201, 161, 90, 0.04);
+}
+
+/* Toggle */
+.culture-card__toggle {
+  width: 100%;
+  text-align: left;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  padding: var(--space-2) 0;
+  transition: color var(--transition-fast);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.culture-card__toggle:hover {
+  color: var(--color-text-primary);
+}
+
+/* Expanded details */
+.culture-card__details {
+  margin-top: var(--space-5);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.culture-card__detail-row {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.culture-card__detail-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+}
+
+.culture-card__detail-value {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.culture-card__colors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.culture-card__color-chip {
+  font-size: var(--font-size-xs);
+  padding: 2px var(--space-3);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+/* Source */
+.culture-card__source {
+  padding: var(--space-3) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.culture-card__source-label {
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--color-text-muted);
+  display: block;
+  margin-bottom: var(--space-2);
+}
+
+.culture-card__source-text {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* Scores */
+.culture-card__scores {
+  margin-top: var(--space-4);
+  padding: var(--space-5) 0;
+  border-top: 1px solid var(--color-border);
+}
+
+.culture-card__scores-title {
+  font-size: var(--font-size-xs);
+  color: var(--color-gold);
+  margin-bottom: var(--space-4);
+  font-weight: 600;
+}
+
+.score-item {
+  margin-bottom: var(--space-3);
+}
+
+.score-item:last-child {
+  margin-bottom: 0;
+}
+
+.score-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-2);
+}
+
+.score-bar {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.score-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.score-fill--authentic {
+  background: #4ade80;
+}
+
+.score-fill--remix {
+  background: #f472b6;
+}
+
+.score-fill--harmony {
+  background: #60a5fa;
+}

@@ -1,0 +1,145 @@
+.turntable {
+  padding: var(--space-8) 0;
+}
+
+.turntable__header {
+  margin-bottom: var(--space-6);
+}
+
+.turntable__title {
+  font-size: var(--font-size-2xl);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+/* Main frame — no border-radius, no shadow, editorial feel */
+.turntable__frame {
+  position: relative;
+  max-width: 560px;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: pan-y;
+}
+
+.turntable__frame.is-dragging {
+  cursor: grabbing;
+}
+
+.turntable__image-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--color-bg-secondary);
+  will-change: transform;
+  transition: transform 0.1s ease-out;
+}
+
+.turntable__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+.turntable__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Navigation dots — text-based chips */
+.turntable__dots {
+  display: flex;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.turntable__dot {
+  padding: var(--space-1) var(--space-4);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-sans);
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.turntable__dot:hover:not(:disabled) {
+  color: var(--color-text-primary);
+  border-color: var(--color-text-secondary);
+}
+
+.turntable__dot.active {
+  color: var(--color-bg-primary);
+  background: var(--color-text-primary);
+  border-color: var(--color-text-primary);
+}
+
+.turntable__dot.pending {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.turntable__status {
+  margin-top: var(--space-3);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+/* Skeleton loading — editorial shimmer */
+.turntable__skeleton-frame {
+  position: relative;
+  max-width: 560px;
+  aspect-ratio: 3 / 4;
+  background: var(--color-bg-secondary);
+  overflow: hidden;
+}
+
+.skeleton-shimmer {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 30%,
+    rgba(247, 243, 236, 0.04) 50%,
+    transparent 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.turntable__skeleton-info {
+  position: absolute;
+  bottom: var(--space-6);
+  left: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .turntable__image-wrapper {
+    transition: none;
+  }
+  .skeleton-shimmer {
+    animation: none;
+  }
+}

@@ -1,0 +1,101 @@
+[
+  {
+    "id": "ao_dai_hue",
+    "vung_mien": "Trung",
+    "ten": "Áo dài Huế truyền thống",
+    "mo_ta_ngan": "Áo dài Huế với sắc tím đặc trưng, tôn dáng thanh thoát, mang đậm hồn cố đô",
+    "mau_dac_trung": ["tím Huế", "trắng ngà", "xanh ngọc bích"],
+    "chat_lieu": "Lụa tơ tằm, voan, gấm",
+    "phu_kien_di_kem": ["nón bài thơ", "khăn vành dây", "guốc mộc sơn"],
+    "boi_canh_phu_hop": ["lễ hội", "chụp ảnh di sản", "đám hỏi", "kỷ yếu"],
+    "gioi_tinh": "nữ",
+    "y_nghia": "Áo dài Huế là biểu tượng của nét đẹp dịu dàng, đoan trang của người phụ nữ cố đô. Sắc tím Huế tượng trưng cho sự thuỷ chung, nhẹ nhàng, thơ mộng — gắn liền với hình ảnh sông Hương, núi Ngự. Áo dài Huế thường có tà dài chấm gót, ôm sát thân, tạo vóc dáng thanh mảnh.",
+    "nguon_tham_khao": "Bảo tàng Cổ vật Cung đình Huế; Trần Đình Sơn, 'Áo dài Việt Nam', NXB Văn hoá Nghệ thuật, 2006",
+    "anh_dai_dien": "/generated/ao_dai_hue_0deg.png",
+    "canh_bao_phoi": [
+      {
+        "tranh_ket_hop_voi": ["ao_ba_ba_nam_bo"],
+        "ly_do": "Khăn vành dây là biểu tượng cung đình Huế, không phù hợp khi kết hợp với phong cách bình dân Nam Bộ"
+      },
+      {
+        "tranh_ket_hop_voi": ["ao_the_khan_xep"],
+        "ly_do": "Áo dài Huế nữ và áo the khăn xếp nam có phong cách trang trọng nhưng thuộc hai hệ trang phục khác nhau, nên phối riêng"
+      }
+    ]
+  },
+  {
+    "id": "ao_tu_than",
+    "vung_mien": "Bắc",
+    "ten": "Áo tứ thân Kinh Bắc",
+    "mo_ta_ngan": "Trang phục truyền thống vùng Kinh Bắc với 4 tà áo bay bổng, đi cùng nón quai thao",
+    "mau_dac_trung": ["nâu non", "đỏ thắm", "vàng mỡ gà"],
+    "chat_lieu": "Vải the, lụa Hà Đông",
+    "phu_kien_di_kem": ["nón quai thao", "yếm đào", "thắt lưng bao xanh", "dép cong"],
+    "boi_canh_phu_hop": ["lễ hội", "hội Lim", "chụp ảnh truyền thống", "kỷ yếu", "Tết"],
+    "gioi_tinh": "nữ",
+    "y_nghia": "Áo tứ thân là trang phục cổ truyền tiêu biểu của phụ nữ Bắc Bộ, đặc biệt vùng Kinh Bắc (Bắc Ninh). Bốn tà áo tượng trưng cho tứ thân phụ mẫu (cha mẹ hai bên). Đi kèm yếm đào, nón quai thao, tạo nên hình ảnh liền chị quan họ duyên dáng.",
+    "nguon_tham_khao": "Đoàn Thị Tình, 'Trang phục Việt Nam', NXB Mỹ thuật, 2006; Bảo tàng Dân tộc học Việt Nam",
+    "anh_dai_dien": "/generated/ao_tu_than_0deg.png",
+    "canh_bao_phoi": [
+      {
+        "tranh_ket_hop_voi": ["ao_dai_hue"],
+        "ly_do": "Nón quai thao là đặc trưng Kinh Bắc, không nên kết hợp với áo dài Huế vì khác hệ thống trang phục vùng miền"
+      }
+    ]
+  },
+  {
+    "id": "ao_ba_ba_nam_bo",
+    "vung_mien": "Nam",
+    "ten": "Áo bà ba Nam Bộ",
+    "mo_ta_ngan": "Trang phục bình dị, gần gũi của người dân Nam Bộ — mộc mạc mà vẫn thanh lịch",
+    "mau_dac_trung": ["đen", "trắng", "nâu đất", "xanh lá đậm"],
+    "chat_lieu": "Vải bà ba, lụa, kate",
+    "phu_kien_di_kem": ["khăn rằn", "nón lá", "guốc mộc", "trâm cài tóc"],
+    "boi_canh_phu_hop": ["Tết", "lễ hội", "dạo phố", "chụp ảnh truyền thống", "đám cưới"],
+    "gioi_tinh": "cả hai",
+    "y_nghia": "Áo bà ba là trang phục gắn liền với đời sống thường nhật và văn hoá sông nước miền Tây Nam Bộ. Thiết kế đơn giản, thoáng mát, phù hợp khí hậu nóng ẩm. Khi kết hợp với khăn rằn — biểu tượng của sự chất phác, nghĩa tình — tạo nên hình ảnh đặc trưng Nam Bộ.",
+    "nguon_tham_khao": "Nguyễn Thị Minh Thái, 'Văn hóa trang phục Nam Bộ', NXB Tổng hợp TP.HCM, 2010; Bảo tàng Phụ nữ Nam Bộ",
+    "anh_dai_dien": "/generated/ao_ba_ba_nam_bo_0deg.png",
+    "canh_bao_phoi": [
+      {
+        "tranh_ket_hop_voi": ["ao_dai_hue"],
+        "ly_do": "Áo bà ba mang phong cách bình dân, mộc mạc — không phù hợp phối với phụ kiện cung đình như khăn vành dây của Huế"
+      }
+    ]
+  },
+  {
+    "id": "ao_dai_cach_tan",
+    "vung_mien": "Cả ba miền",
+    "ten": "Áo dài cách tân hiện đại",
+    "mo_ta_ngan": "Biến tấu áo dài truyền thống với phom dáng ngắn, năng động — phù hợp Gen Z",
+    "mau_dac_trung": ["pastel hồng", "be", "trắng kem", "đen classic", "xanh cobalt"],
+    "chat_lieu": "Taffeta, organza, lụa pha, kaki mềm",
+    "phu_kien_di_kem": ["clutch bag", "giày cao gót", "kính mắt", "vòng tay ngọc"],
+    "boi_canh_phu_hop": ["kỷ yếu", "đám cưới", "dạo phố", "Tết", "chụp ảnh di sản"],
+    "gioi_tinh": "cả hai",
+    "y_nghia": "Áo dài cách tân là sự kết hợp giữa truyền thống và hiện đại — giữ nguyên tinh thần thanh lịch của áo dài nhưng biến tấu tà ngắn hơn, phom dáng thoải mái hơn, phù hợp với nhịp sống năng động của giới trẻ. Đây là cách thế hệ mới tiếp nối và sáng tạo di sản trang phục dân tộc.",
+    "nguon_tham_khao": "Tạp chí Đẹp, chuyên đề 'Áo dài đương đại', 2022; Vietnam Fashion Week archives",
+    "anh_dai_dien": "/generated/ao_dai_cach_tan_0deg.png",
+    "canh_bao_phoi": []
+  },
+  {
+    "id": "ao_the_khan_xep",
+    "vung_mien": "Bắc",
+    "ten": "Áo the khăn xếp",
+    "mo_ta_ngan": "Trang phục nam giới truyền thống Bắc Bộ — trang trọng, lịch lãm trong các dịp lễ nghi",
+    "mau_dac_trung": ["đen", "xanh thẫm", "nâu gụ"],
+    "chat_lieu": "Vải the, lụa, gấm",
+    "phu_kien_di_kem": ["khăn xếp", "ô lục soạn", "quạt giấy", "guốc mộc"],
+    "boi_canh_phu_hop": ["Tết", "lễ hội", "đám cưới", "chụp ảnh truyền thống"],
+    "gioi_tinh": "nam",
+    "y_nghia": "Áo the (áo dài nam) kết hợp khăn xếp là bộ trang phục trang trọng của nam giới Bắc Bộ trong các dịp lễ Tết, cưới hỏi. Khăn xếp được gấp công phu theo nhiều kiểu, thể hiện sự chỉn chu và tôn kính. Bộ trang phục này thường thấy trong các nghi lễ truyền thống, thờ cúng tổ tiên.",
+    "nguon_tham_khao": "Trần Quang Đức, 'Ngàn năm áo mũ', NXB Thế giới, 2013; Bảo tàng Lịch sử Quốc gia Việt Nam",
+    "anh_dai_dien": "/generated/ao_the_khan_xep_0deg.png",
+    "canh_bao_phoi": [
+      {
+        "tranh_ket_hop_voi": ["ao_ba_ba_nam_bo"],
+        "ly_do": "Khăn xếp mang tính nghi lễ trang trọng Bắc Bộ, không hợp với phong cách giản dị Nam Bộ của áo bà ba"
+      }
+    ]
+  }
+]
