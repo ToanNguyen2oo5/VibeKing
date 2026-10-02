@@ -95,16 +95,26 @@ Yêu cầu ảnh:
  * @param {string|null} referenceImageBase64 - Ảnh tham chiếu (ảnh góc 0°) cho các góc sau
  * @returns {Promise<string>} base64 image data
  */
-export async function generateOutfitImage(userPhotoBase64, outfitData, angle = 0, referenceImageBase64 = null, customizations = {}) {
+export async function generateOutfitImage(userPhotoBase64, outfitData, angle = 0, referenceImageBase64 = null, customizations = {}, onStatusUpdate = null) {
   if (DEMO_MODE) {
-    return getDemoImage(outfitData.id, angle);
+    onStatusUpdate?.('Demo Mode (Ảnh mẫu có sẵn)');
+    const img = await getDemoImage(outfitData.id, angle);
+    return {
+      image: img,
+      modelName: 'Demo Mode (Ảnh mẫu có sẵn)'
+    };
   }
 
   // Nếu người dùng upload ảnh mặt và là góc chính diện (0 độ), ưu tiên dùng Hugging Face FLUX PuLID
   if (userPhotoBase64 && angle === 0) {
     try {
       console.log('Sử dụng Hugging Face FLUX PuLID cho:', outfitData.ten);
-      return await generateOutfitImageWithFaceHF(userPhotoBase64, outfitData, angle, customizations);
+      onStatusUpdate?.('FLUX.1-dev + PuLID (Hugging Face)');
+      const img = await generateOutfitImageWithFaceHF(userPhotoBase64, outfitData, angle, customizations);
+      return {
+        image: img,
+        modelName: 'FLUX.1-dev + PuLID (Hugging Face)'
+      };
     } catch (hfError) {
       console.warn(
         'Hugging Face FLUX PuLID không khả dụng hoặc hết Quota ZeroGPU. Tự động chuyển tiếp sang Gemini để ghép mặt:',
@@ -114,6 +124,7 @@ export async function generateOutfitImage(userPhotoBase64, outfitData, angle = 0
     }
   }
 
+  onStatusUpdate?.('Gemini 3.1 Flash Image (Google AI)');
   const genAI = getAI();
   const prompt = buildOutfitPrompt(outfitData, angle, customizations);
 
@@ -163,13 +174,21 @@ export async function generateOutfitImage(userPhotoBase64, outfitData, angle = 0
 
     for (const part of response.candidates[0].content.parts) {
       if (part.inlineData) {
-        return part.inlineData.data;
+        return {
+          image: part.inlineData.data,
+          modelName: 'Gemini 3.1 Flash Image'
+        };
       }
     }
     throw new Error('Gemini không trả về ảnh.');
   } catch (error) {
     console.warn('Gemini API thất bại (có thể hết Quota). Đang chuyển sang Fallback API (Pollinations.ai)...', error.message);
-    return await generateFallbackImage(outfitData, angle, customizations);
+    onStatusUpdate?.('Pollinations.ai (Flux Fallback)');
+    const fallbackUrl = await generateFallbackImage(outfitData, angle, customizations);
+    return {
+      image: fallbackUrl,
+      modelName: 'Pollinations.ai (Flux Fallback)'
+    };
   }
 }
 

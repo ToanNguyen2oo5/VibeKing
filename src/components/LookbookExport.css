@@ -109,6 +109,14 @@
   line-height: 1.5;
 }
 
+.lookbook-card__ai-model {
+  margin-top: var(--space-2);
+  font-size: 10px;
+  color: var(--color-gold);
+  opacity: 0.85;
+  font-family: var(--font-sans);
+}
+
 .lookbook-card__watermark {
   text-align: center;
   padding: var(--space-2);

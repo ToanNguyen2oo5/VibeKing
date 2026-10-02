@@ -28,9 +28,26 @@
   line-height: 1.3;
 }
 
+.culture-card__meta-tags {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
 .culture-card__gender-tag {
   font-size: var(--font-size-xs);
   color: var(--color-text-muted);
+}
+
+.culture-card__model-tag {
+  font-size: var(--font-size-xs);
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  background: rgba(123, 160, 201, 0.1);
+  border: 1px solid rgba(123, 160, 201, 0.25);
+  color: #a5c4e8;
+  font-family: var(--font-sans);
 }
 
 /* Badge chips */

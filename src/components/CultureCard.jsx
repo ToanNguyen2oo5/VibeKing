@@ -84,11 +84,16 @@ export default function CultureCard({ outfit, customizations, useDemoData = fals
             {isLoading ? <span className="skeleton" style={{ width: 200, height: 24 }} /> : (cultureInfo?.ten || outfit.ten)}
           </h3>
         </div>
-        {outfit.gioi_tinh && (
-          <span className="culture-card__gender-tag">
-            {outfit.gioi_tinh === 'nữ' ? '👩 Nữ' : outfit.gioi_tinh === 'nam' ? '👨 Nam' : '⚥ Unisex'}
+        <div className="culture-card__meta-tags">
+          {outfit.gioi_tinh && (
+            <span className="culture-card__gender-tag">
+              {outfit.gioi_tinh === 'nữ' ? '👩 Nữ' : outfit.gioi_tinh === 'nam' ? '👨 Nam' : '⚥ Unisex'}
+            </span>
+          )}
+          <span className="culture-card__model-tag" title="Mô hình AI diễn giải ý nghĩa văn hóa">
+            ⚡ Gemini 2.5 Flash
           </span>
-        )}
+        </div>
       </div>
 
       {/* Main content */}

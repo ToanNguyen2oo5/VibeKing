@@ -41,6 +41,8 @@ export default function App() {
   const [cultureInfo, setCultureInfo] = useState(null);
   const [mismatchWarnings, setMismatchWarnings] = useState([]);
   const [error, setError] = useState(null);
+  const [activeModel, setActiveModel] = useState(null);
+  const [currentModelStatus, setCurrentModelStatus] = useState(null);
 
   // Refs for scrolling
   const outfitRef = useRef(null);
@@ -100,18 +102,29 @@ export default function App() {
     setIsGenerating(true);
     setError(null);
     setTurntableImages(null);
+    setActiveModel(null);
+    setCurrentModelStatus(
+      data.userPhoto
+        ? 'FLUX.1-dev + PuLID (Hugging Face)'
+        : (DEMO_MODE ? 'Demo Mode (Ảnh mẫu)' : 'Gemini 3.1 Flash Image')
+    );
     setGenerateProgress({ current: 0, total: 4 });
 
     try {
       setGenerateProgress({ current: 1, total: 4 });
-      const frontImage = await generateOutfitImage(
+      const frontResult = await generateOutfitImage(
         data.userPhoto,
         selectedOutfit,
         0,
         null,
-        data.customizations
+        data.customizations,
+        (modelName) => setCurrentModelStatus(modelName)
       );
       
+      const frontImage = frontResult?.image || frontResult;
+      const modelUsed = frontResult?.modelName || (data.userPhoto ? 'FLUX.1-dev + PuLID' : 'Gemini 3.1 Flash Image');
+      
+      setActiveModel(modelUsed);
       setTurntableImages([frontImage]);
       setIsGenerating(false);
 
@@ -120,13 +133,14 @@ export default function App() {
       for (const angle of angles) {
         try {
           await new Promise(r => setTimeout(r, 10000)); // Delay 10s
-          const img = await generateOutfitImage(
+          const res = await generateOutfitImage(
             data.userPhoto,
             selectedOutfit,
             angle,
             frontImage,
             data.customizations
           );
+          const img = res?.image || res;
           setTurntableImages(prev => {
              if(!prev) return [img];
              return [...prev, img];
@@ -160,6 +174,8 @@ export default function App() {
     setCultureInfo(null);
     setMismatchWarnings([]);
     setError(null);
+    setActiveModel(null);
+    setCurrentModelStatus(null);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, []);
 
@@ -183,6 +199,14 @@ export default function App() {
             <a href="#scene-selector" className="btn btn-primary">
               Bắt đầu phối đồ
             </a>
+            <div className="hero__model-indicators">
+              <span className="hero__model-tag" title="Mô hình AI tạo hình ảnh trang phục">
+                🎨 Image: <strong>Gemini 3.1 Flash</strong> / <strong>FLUX PuLID</strong>
+              </span>
+              <span className="hero__model-tag" title="Mô hình AI thuyết minh ý nghĩa văn hóa">
+                📜 Text: <strong>Gemini 2.5 Flash</strong>
+              </span>
+            </div>
             {DEMO_MODE && (
               <span className="hero__demo-badge">Demo Mode</span>
             )}
@@ -252,6 +276,8 @@ export default function App() {
                   images={turntableImages}
                   isLoading={isGenerating}
                   progress={generateProgress}
+                  activeModel={activeModel}
+                  currentModelStatus={currentModelStatus}
                 />
               </div>
 
@@ -267,6 +293,7 @@ export default function App() {
                       outfit={selectedOutfit}
                       imageBase64={turntableImages[0]}
                       cultureInfo={cultureInfo}
+                      modelName={activeModel}
                     />
                   </>
                 )}

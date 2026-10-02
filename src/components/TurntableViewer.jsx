@@ -8,7 +8,7 @@ const ANGLES = [
   { label: 'Trái', angle: 270 }
 ];
 
-export default function TurntableViewer({ images, isLoading, progress }) {
+export default function TurntableViewer({ images, isLoading, progress, activeModel, currentModelStatus }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const [preloaded, setPreloaded] = useState({});
@@ -116,9 +116,16 @@ export default function TurntableViewer({ images, isLoading, progress }) {
           <div className="skeleton-shimmer" />
           <div className="turntable__skeleton-info">
             <span className="spinner" />
-            <span>
-              {progress ? `${Math.round((progress.current / progress.total) * 100)}%` : 'Đang xử lý…'}
-            </span>
+            <div className="turntable__skeleton-details">
+              <span className="turntable__skeleton-progress">
+                {progress ? `${Math.round((progress.current / progress.total) * 100)}%` : 'Đang xử lý…'}
+              </span>
+              {currentModelStatus && (
+                <span className="turntable__skeleton-model animate-fade-in">
+                  Đang chạy: <strong>{currentModelStatus}</strong>
+                </span>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -133,9 +140,18 @@ export default function TurntableViewer({ images, isLoading, progress }) {
   return (
     <section className="turntable" id="turntable-viewer">
       <div className="turntable__header">
-        <h2 className="turntable__title">
-          <span className="text-gradient">Kéo ngang</span> để xoay nhân vật
-        </h2>
+        <div className="turntable__header-row">
+          <h2 className="turntable__title">
+            <span className="text-gradient">Kéo ngang</span> để xoay nhân vật
+          </h2>
+          {activeModel && (
+            <div className="turntable__model-badge animate-fade-in" id="active-model-badge" title="Mô hình AI được sử dụng">
+              <span className="turntable__model-dot" />
+              <span className="turntable__model-label">Mô hình AI:</span>
+              <span className="turntable__model-name">{activeModel}</span>
+            </div>
+          )}
+        </div>
       </div>
 
       <div

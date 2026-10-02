@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import html2canvas from 'html2canvas';
 import './LookbookExport.css';
 
-export default function LookbookExport({ outfit, imageBase64, cultureInfo }) {
+export default function LookbookExport({ outfit, imageBase64, cultureInfo, modelName }) {
   const cardRef = useRef(null);
   const [isExporting, setIsExporting] = useState(false);
   const [shareSupported] = useState(() => !!navigator.share);
@@ -113,6 +113,11 @@ export default function LookbookExport({ outfit, imageBase64, cultureInfo }) {
               <p className="lookbook-card__desc">
                 {cultureInfo.y_nghia_dien_giai.slice(0, 120)}...
               </p>
+            )}
+            {modelName && (
+              <div className="lookbook-card__ai-model">
+                ⚡ AI: {modelName}
+              </div>
             )}
           </div>
 
